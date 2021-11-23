@@ -7,9 +7,9 @@ const Row = ({mascota, setMascotaEdit, deleteMascota, irDetalle}) => {
             <td>{nombre}</td>
             <td>{tipo}</td>
             <td>
-             <button onClick={() => {setMascotaEdit(mascota)}}>Update</button>
-             <button onClick={() => {deleteMascota(id)}}>Delete </button>
-             <button onClick={() => {irDetalle(id)}}>Detalle </button>
+             <button style={{"margin-right":"10px"}} className="button is-success is-light" onClick={() => {irDetalle(id)}}>Detalle </button>
+             <button style={{"margin-right":"10px"}} className="button is-warning is-light" onClick={() => {setMascotaEdit(mascota)}}>Update</button>
+             <button className="button is-danger is-light" onClick={() => {deleteMascota(id)}}>Delete </button>
             </td>
         </tr>
     )

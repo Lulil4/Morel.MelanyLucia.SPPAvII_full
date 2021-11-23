@@ -2,7 +2,7 @@ const Mascota = require("../models/Mascota");
 const { verifyToken } = require("../utils/middleware");
 const mascotasRouter = require("express").Router();
 
-mascotasRouter.use(verifyToken); 
+//mascotasRouter.use(verifyToken); 
 //NOTA:
 //para que antes de TODAS LAS RUTAS  se verifique el toquen
 //SI LO BORRO Y PONGO:

@@ -4,12 +4,12 @@ import Row from './Row'
 const Tabla = ({data, setMascotaEdit, deleteMascota, irDetalle}) => {
     return (
         <>
-        <h2>Mascotas List</h2>
-        <table>
+        <table className="table" align="center">
             <thead>
                 <tr>
                     <th>Nombre</th>
                     <th>Tipo</th>
+                    <th>Botonitos</th>
                 </tr>
                 </thead>
                 <tbody>

@@ -4,7 +4,7 @@ const { verifyToken } = require("../utils/middleware");
 
 const bcrypt = require("bcrypt"); 
 
-usersRouter.use(verifyToken); 
+//usersRouter.use(verifyToken); 
 
 usersRouter.get('/', async (req, res, next) => {
     try {

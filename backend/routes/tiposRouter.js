@@ -2,7 +2,7 @@ const Tipo = require("../models/Tipo");
 const { verifyToken } = require("../utils/middleware");
 const tiposRouter = require("express").Router();
 
-tiposRouter.use(verifyToken); 
+//tiposRouter.use(verifyToken); 
 
 tiposRouter.get("/", (req, res, next) => { 
     Tipo.find({}) 

@@ -5,11 +5,12 @@ import Error404 from './pages/Error404';
 import Header from './components/Header';
 import { Route, Switch } from 'react-router';
 import { BrowserRouter as Router } from 'react-router-dom';
+import 'bulma/css/bulma.css';
 
 function App() {
   return (
     <Router>
-    <Header titulo="Bichitos"/>
+    <Header titulo="Mascotitas"/>
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route exact path="/mascota/:id" component={Detalle}/>

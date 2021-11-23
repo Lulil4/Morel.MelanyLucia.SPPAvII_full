@@ -23,7 +23,7 @@ const Formulario = ({ createMascota, updateMascota, mascotaEdit, setMascotaEdit,
     const handleChange = ({ target }) => {
 
         if (target.name === "vacunado") {
-            if(target.checked){
+            if (target.checked) {
                 setForm(() => {
                     return {
                         ...form,
@@ -31,7 +31,7 @@ const Formulario = ({ createMascota, updateMascota, mascotaEdit, setMascotaEdit,
                     }
                 });
             }
-            else{
+            else {
                 setForm(() => {
                     return {
                         ...form,
@@ -41,7 +41,7 @@ const Formulario = ({ createMascota, updateMascota, mascotaEdit, setMascotaEdit,
             }
 
         }
-        else{
+        else {
             setForm(() => {
                 return {
                     ...form,
@@ -49,7 +49,7 @@ const Formulario = ({ createMascota, updateMascota, mascotaEdit, setMascotaEdit,
                 }
             });
         }
-       
+
     }
 
     const handleSubmit = (e) => {
@@ -78,34 +78,48 @@ const Formulario = ({ createMascota, updateMascota, mascotaEdit, setMascotaEdit,
 
     return (
         <>
-            <h2>{id ? "Update Mascota" : "Add Mascota"}</h2>
-            <form onSubmit={handleSubmit}>
-                <input type="text"
-                    name="nombre"
-                    placeholder="Nombre"
-                    autoComplete="off"
-                    value={nombre}
-                    onChange={handleChange} />
+            <div className="columns is-centered">
+                <div className="column is-6">
+                    <h2 style={{"text-align":"center", "color":"white", "-webkit-text-stroke":"1px black"}} className="title is-3">{id ? "Update Mascota" : "Add Mascota"}</h2>
+                    <form onSubmit={handleSubmit}>
+                        <input type="text"
+                            name="nombre"
+                            placeholder="Nombre"
+                            autoComplete="off"
+                            value={nombre}
+                            onChange={handleChange}
+                            className="input is-rounded" />
 
-                <input type="number"
-                    name="edad"
-                    placeholder="Edad"
-                    autoComplete="off"
-                    onChange={handleChange}
-                    value={edad} />
+                        <input type="number"
+                            name="edad"
+                            placeholder="Edad"
+                            autoComplete="off"
+                            onChange={handleChange}
+                            value={edad}
+                            className="input is-rounded"
+                            style={{ "margin-top": "5%" }} />
 
-                <input type="checkbox" name="vacunado" onChange={handleChange} checked={vacunado}/>
 
-                <Select tiposMascota={tiposMascota} handleChange={handleChange} />
+                        <label style={{"text-align":"center", "color":"white", "-webkit-text-stroke":"1px black", "margin-top": "5%"}} className="title is-4" htmlFor="vacunado">Vacunado: <input type="checkbox" name="vacunado" onChange={handleChange} checked={vacunado} /></label>
 
-                <textarea
-                    value={observaciones}
-                    name="observaciones"
-                    onChange={handleChange} />
+                        <Select tiposMascota={tiposMascota} handleChange={handleChange} />
 
-                <input type="submit" value="Enviar" />
-                <input type="reset" value="Limpiar" onClick={handleReset} />
-            </form>
+                        <textarea
+                            className="textarea is-warning"
+                            placeholder="Observaciones, es opcional"
+                            value={observaciones}
+                            name="observaciones"
+                            onChange={handleChange}
+                            style={{ "margin-top": "5%" }} />
+                        <div style={{ display: "flex" }}>
+                            <input style={{"margin-right":"5%", "margin-top":"5%"}} className="button is-warning is-light" type="reset" value="Limpiar" onClick={handleReset} />
+                            <input style={{"margin-top":"5%"}} className="button is-success is-light" type="submit" value="Enviar" />
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
         </>
     )
 }

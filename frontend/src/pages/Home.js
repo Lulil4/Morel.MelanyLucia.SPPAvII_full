@@ -4,9 +4,7 @@ import Crud from '../components/Crud';
 const Home = () => {
   
   return (
-    <div className="App">
     <Crud/>
-    </div>
   );
 }
 
