@@ -33,6 +33,9 @@ const handlerError = (error, req, res, next)=>{ //middleware especial, es de exp
     else if(error.name === "TokenExpiredError"){
         res.status(401).send({error: error.name, message: error.message});
     }
+    else if(error.name === "UsuarioExistenteError"){
+        res.status(401).send({error: error.name, message: error.message});
+    }
     else{
         res.status(500).send({error:"Error interno del sistema"});
     }
