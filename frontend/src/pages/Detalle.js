@@ -12,26 +12,26 @@ const Detalle = () => {
 
     useEffect(() => {
         const URL = "http://localhost:3000/api/mascotas/";
-        setisLoading(true);
-
-        fetch(URL + id, {
-            headers: {
-                "Content-Type": "application/json",
-                "authorization": JSON.stringify(token)
-            }
-        })
-            .then(res => res.ok ? res.json() : Promise.reject(res.status + ": " + res.statusText))
-            .then(mascota => {
-                setMascota(mascota);
-
+        if (token){
+            fetch(URL + id, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": JSON.stringify(token)
+                }
             })
-            .catch(err => console.error(err))
-            .finally(() => {
-                setTimeout(() => {
-                    setisLoading(false);
-                }, 800);
-            });
-
+                .then(res => res.ok ? res.json() : Promise.reject(res.status + ": " + res.statusText))
+                .then(mascota => {
+                    setMascota(mascota);
+    
+                })
+                .catch(err => console.error(err))
+                .finally(() => {
+                    setTimeout(() => {
+                        setisLoading(false);
+                    }, 800);
+                });
+                setisLoading(true);
+        }
     }, [id, token]);
 
     return (

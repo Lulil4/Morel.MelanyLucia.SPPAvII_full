@@ -1,60 +1,11 @@
-import { React, useState } from 'react';
-import { useHistory } from 'react-router';
+import { React} from 'react';
 
-const initialForm = {
-    username: "",
-    password: ""
-}
-
-const Registro = () => {
-    const token = window.localStorage.getItem("token");
-    const URL = "http://localhost:3000/api/users/";
-    const [form, setForm] = useState(initialForm)
-    const {username, password} = form;
-    const history = useHistory();
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        if ((!username || !password)) { //cadena vacia es TRUE!
-            alert("Por favor, complete todos los campos!");
-            return;
-        }
-        else if(password.length < 6){
-            alert("Contrasenia muy corta!");
-            return;
-        }
-
-        //VERIFICAR EXISTENCIA?
-
-        fetch(URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "authorization": JSON.stringify(token)
-            },
-            body: JSON.stringify(form)
-        }).then(res => res.json())
-            .catch(error => {
-                alert("Hubo un error!")
-            })
-            .finally(() => {
-                alert("Ya puedes iniciar sesión! :) <3");
-                history.push("/");
-            });
-    }
-
-    const handleChange = ({target})=>{
-        setForm(() => {
-            return {
-                ...form,
-                [target.name]: target.value
-            }
-        });
-      }
+const Registro = ({handleChange, handleSubmit, username, password}) => {
+   
 
     return (
        <>
+       <h1 className="title is-2" style={{"textAlign":"center", "color":"white", "WebkitTextStroke":"1px black", "marginTop": "5%"}}>Registrarse</h1>
             <form onSubmit={handleSubmit}>
                 <input type="text"
                     name="username"
@@ -63,7 +14,7 @@ const Registro = () => {
                     value={username}
                     onChange={handleChange}
                     className="input is-rounded" 
-                    style={{"margin-bottom":"5%"}}/>
+                    style={{"marginBottom":"5%"}}/>
 
                 <input type="password"
                     name="password"
@@ -73,7 +24,7 @@ const Registro = () => {
                     onChange={handleChange}
                     className="input is-rounded" />
 
-                <input className="button is-success" style={{"margin-top": "5%"}} type="submit" value="Registrarse"/>
+                <input className="button is-success" style={{"marginTop": "5%"}} type="submit" value="Registrarse"/>
             </form>
        </>
     )
