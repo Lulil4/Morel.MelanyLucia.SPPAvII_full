@@ -10,7 +10,7 @@ loginRouter.post("/", async(req, res, next)=>{ //HACEMOS EL LOGIN!
         const user = await User.findOne({username}); 
         const correctPass = user == null? false : await bcrypt.compare(password, user.passwordHash); //es asincrono
         //solo lo compara si el usuario no es null
-        if ( !(user && correctPass)){ //existe Y la contrasenia es correcta
+        if ( !(user && correctPass)){ 
            return next({name: "ValidationError" , message:"password o username invalidos"});
         }
 
@@ -22,7 +22,6 @@ loginRouter.post("/", async(req, res, next)=>{ //HACEMOS EL LOGIN!
         //AGREGO TIEMPO DE EXPIRACION COMO SEGUNDO PARAM 
         const token = await jwt.sign(userToken, SECRET, {expiresIn: "12h"}); //agarra la palabra secreta, el usuario y genera el token
         //la palabra secreta esta en .env y la traigo desde config
-        
         res.status(200).json({
             token,
             username

@@ -49,9 +49,11 @@ const logger = ((req, res, next) => {
 
 const verifyToken = async (req, res, next)=>{ 
     const bearerToken = req.headers["authorization"]; //asi me traigo el header
-    if (typeof bearerToken !== "undefined"){//puede que no este el token
+
+    if (bearerToken !== undefined && bearerToken != "null"){//puede que no este el token
         req.token = bearerToken.split(" ")[1];
-        
+        const len = req.token.length;
+        req.token = req.token.substring(0, len-1)
         try{
             const data = await jwt.verify(req.token, SECRET); 
             next(); //le digo que siga siga

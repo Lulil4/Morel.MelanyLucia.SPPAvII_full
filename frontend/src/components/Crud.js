@@ -6,6 +6,8 @@ import '../App.css'
 import { useHistory } from 'react-router-dom';
 
 const Crud = () => {
+
+    const token = window.localStorage.getItem("token");
     const URL = "http://localhost:3000/api/mascotas/";
     const URLTIPOS = "http://localhost:3000/api/tipos/";
     const [mascotas, setMascotas] = useState([]);
@@ -16,10 +18,14 @@ const Crud = () => {
 
     useEffect(() => {
         setIsLoading(true);
-
+        console.info(token);
         const getMascotas = async (url) => {
             try {
-                const res = await fetch(url);
+                const res = await fetch(url, {
+                    headers: {
+                        "authorization": JSON.stringify(token)
+                    }
+                });
                 const data = await res.json();
                 data.forEach((mascota) => {
                     setMascotas((mascotas) => {
@@ -34,7 +40,12 @@ const Crud = () => {
 
         const getTipos = async (url) => {
             try {
-                const res = await fetch(url);
+                const res = await fetch(url, {
+                    headers: {
+                        "authorization": JSON.stringify(token)
+                    }
+
+                });
                 const data = await res.json();
                 data.forEach((tipo) => {
                     setTipos((tiposMascota) => {
@@ -50,7 +61,7 @@ const Crud = () => {
             getTipos(URLTIPOS);
             setIsLoading(false);
         }, 700);
-  
+
     }, [])
 
 
@@ -61,7 +72,8 @@ const Crud = () => {
             fetch(URL, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "authorization": JSON.stringify(token)
                 },
                 body: JSON.stringify(newMascota)
             }).then(res => res.json())
@@ -79,7 +91,8 @@ const Crud = () => {
             fetch(URL + mascotaUpdated.id, {
                 method: "PUT",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "authorization": JSON.stringify(token)
                 },
                 body: JSON.stringify(mascotaUpdated)
             }).then((res) => {
@@ -104,7 +117,11 @@ const Crud = () => {
 
             setTimeout(() => {
                 fetch(URL + id, {
-                    method: "DELETE"
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "authorization": JSON.stringify(token)
+                    },
                 }).then((res) => {
                     if (res.ok) {
                         setMascotas(mascotas => {
@@ -125,33 +142,38 @@ const Crud = () => {
     };
 
     return (
-        <div className="columns is-centered">
-            <div className="column is-6">
-                <Formulario className="form"
-                    createMascota={createMascota}
-                    updateMascota={updateMascota}
-                    mascotaEdit={mascotaEdit}
-                    setMascotaEdit={setMascotaEdit}
-                    tiposMascota={tiposMascota}
-                    irDetalle={irDetalle}
-                />
-            </div>
-            <div className="column is-6">
-            <h2 style={{"text-align":"center", "color":"white", "-webkit-text-stroke":"1px black"}} className="title is-3">Mascotas List</h2>
-                {
-                    isLoading ? (<Loader />) :
-                        (<Tabla data={mascotas}
-                            setMascotaEdit={setMascotaEdit}
-                            deleteMascota={deleteMascota}
-                            irDetalle={irDetalle} />)
-                }
 
-            </div>
-        </div>
+        <>
+            {
+                token ? (
+                    <div className="columns is-centered">
+                        <div className="column is-6">
+                            <Formulario className="form"
+                                createMascota={createMascota}
+                                updateMascota={updateMascota}
+                                mascotaEdit={mascotaEdit}
+                                setMascotaEdit={setMascotaEdit}
+                                tiposMascota={tiposMascota}
+                                irDetalle={irDetalle}
+                            />
+                        </div>
+                        <div className="column is-6">
+                            <h2 style={{ "textAlign": "center", "color": "white", "WebkitTextStroke": "1px black" }} className="title is-3">Mascotas List</h2>
+                            {
+                                isLoading ? (<Loader />) :
+                                    (<Tabla data={mascotas}
+                                        setMascotaEdit={setMascotaEdit}
+                                        deleteMascota={deleteMascota}
+                                        irDetalle={irDetalle} />)
+                            }
+
+                        </div>
+                    </div>
 
 
-
-
+                ) : (<h1 className="title is-3" style={{ "textAlign": "center", "color": "white", "WebkitTextStroke": "1px black", "margin-top":"5%" }}>Por favor, inicie sesión</h1>)
+            }
+            </>
     )
 }
 
