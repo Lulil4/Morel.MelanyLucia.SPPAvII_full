@@ -9,7 +9,7 @@ const Tabla = ({data, setMascotaEdit, deleteMascota, irDetalle}) => {
                 <tr>
                     <th>Nombre</th>
                     <th>Tipo</th>
-                    <th>Botonitos</th>
+                    <th style={{textAlign:"center"}}>Botonitos</th>
                 </tr>
                 </thead>
                 <tbody>
