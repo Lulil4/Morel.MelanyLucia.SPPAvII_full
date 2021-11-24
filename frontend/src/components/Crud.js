@@ -3,7 +3,7 @@ import Tabla from './Tabla'
 import Loader from './Loader'
 import Formulario from './Formulario'
 import '../App.css'
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const Crud = () => {
 
@@ -18,7 +18,6 @@ const Crud = () => {
 
     useEffect(() => {
         setIsLoading(true);
-        console.info(token);
         const getMascotas = async (url) => {
             try {
                 const res = await fetch(url, {
@@ -62,7 +61,7 @@ const Crud = () => {
             setIsLoading(false);
         }, 700);
 
-    }, [])
+    }, [token])
 
 
     const createMascota = (newMascota) => {
@@ -171,7 +170,8 @@ const Crud = () => {
                     </div>
 
 
-                ) : (<h1 className="title is-3" style={{ "textAlign": "center", "color": "white", "WebkitTextStroke": "1px black", "margin-top":"5%" }}>Por favor, inicie sesión</h1>)
+                ) : (<div className="centrado"><h1 className="title is-3" style={{ "textAlign": "center", "color": "white", "WebkitTextStroke": "1px black", "margin-top":"5%" }}>Por favor, inicie sesión</h1>
+                <button className="button is-primary"><Link to="/">Volver al login</Link></button></div>)
             }
             </>
     )

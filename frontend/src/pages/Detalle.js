@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { Link } from "react-router-dom"
+import Loader from '../components/Loader'
 
 const Detalle = () => {
     const token = window.localStorage.getItem("token");
     const { id } = useParams();
     const [mascota, setMascota] = useState({});
     const { nombre, edad, tipo, vacunado, observaciones } = mascota;
+    const [isLoading, setisLoading] = useState(false);
 
     useEffect(() => {
         const URL = "http://localhost:3000/api/mascotas/";
+        setisLoading(true);
 
         fetch(URL + id, {
             headers: {
@@ -20,15 +23,21 @@ const Detalle = () => {
             .then(res => res.ok ? res.json() : Promise.reject(res.status + ": " + res.statusText))
             .then(mascota => {
                 setMascota(mascota);
-                console.info(mascota);
 
             })
-            .catch(err => console.error(err));
-    }, [id]);
+            .catch(err => console.error(err))
+            .finally(() => {
+                setTimeout(() => {
+                    setisLoading(false);
+                }, 800);
+            });
+
+    }, [id, token]);
 
     return (
         <>
-            {
+        {
+            isLoading ? (<div className="centrado"><Loader /></div>) : 
                 token ? (
                     <div>
                         <nav className="navbar">
@@ -48,9 +57,11 @@ const Detalle = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>) : (<h1 className="title is-3" style={{ "textAlign": "center", "color": "white", "WebkitTextStroke": "1px black", "margin-top": "5%" }}>Por favor, inicie sesión</h1>)
+                    </div>) : (
+                    <div className="centrado"><h1 className="title is-3" style={{ "textAlign": "center", "color": "white", "WebkitTextStroke": "1px black", "margin-top":"5%" }}>Por favor, inicie sesión</h1>
+                <button className="button is-primary"><Link to="/">Volver al login</Link></button></div>)
+            
         }
-
         </>
     );
 }

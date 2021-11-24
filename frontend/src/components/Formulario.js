@@ -80,7 +80,7 @@ const Formulario = ({ createMascota, updateMascota, mascotaEdit, setMascotaEdit,
         <>
             <div className="columns is-centered">
                 <div className="column is-6">
-                    <h2 style={{"text-align":"center", "color":"white", "-webkit-text-stroke":"1px black"}} className="title is-3">{id ? "Update Mascota" : "Add Mascota"}</h2>
+                    <h2 style={{"textAlign":"center", "color":"white", "WebkitTextStroke":"1px black"}} className="title is-3">{id ? "Update Mascota" : "Add Mascota"}</h2>
                     <form onSubmit={handleSubmit}>
                         <input type="text"
                             name="nombre"
@@ -97,10 +97,10 @@ const Formulario = ({ createMascota, updateMascota, mascotaEdit, setMascotaEdit,
                             onChange={handleChange}
                             value={edad}
                             className="input is-rounded"
-                            style={{ "margin-top": "5%" }} />
+                            style={{ "marginTop": "5%" }} />
 
 
-                        <label style={{"text-align":"center", "color":"white", "-webkit-text-stroke":"1px black", "margin-top": "5%"}} className="title is-4" htmlFor="vacunado">Vacunado: <input type="checkbox" name="vacunado" onChange={handleChange} checked={vacunado} /></label>
+                        <label style={{"textAlign":"center", "color":"white", "WebkitTextStroke":"1px black", "marginTop": "5%"}} className="title is-4" htmlFor="vacunado">Vacunado: <input type="checkbox" name="vacunado" onChange={handleChange} checked={vacunado} /></label>
 
                         <Select tiposMascota={tiposMascota} handleChange={handleChange} />
 
@@ -110,10 +110,10 @@ const Formulario = ({ createMascota, updateMascota, mascotaEdit, setMascotaEdit,
                             value={observaciones}
                             name="observaciones"
                             onChange={handleChange}
-                            style={{ "margin-top": "5%" }} />
+                            style={{ "marginTop": "5%" }} />
                         <div style={{ display: "flex" }}>
-                            <input style={{"margin-right":"5%", "margin-top":"5%"}} className="button is-warning is-light" type="reset" value="Limpiar" onClick={handleReset} />
-                            <input style={{"margin-top":"5%"}} className="button is-success is-light" type="submit" value="Enviar" />
+                            <input style={{"marginRight":"5%", "marginTop":"5%"}} className="button is-warning is-light" type="reset" value="Limpiar" onClick={handleReset} />
+                            <input style={{"marginTop":"5%"}} className="button is-success is-light" type="submit" value="Enviar" />
                         </div>
 
 

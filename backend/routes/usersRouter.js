@@ -4,7 +4,7 @@ const { verifyToken } = require("../utils/middleware");
 
 const bcrypt = require("bcrypt"); 
 
-usersRouter.use(verifyToken); 
+//usersRouter.use(verifyToken); sino no puedo hacer registro
 
 usersRouter.get('/', async (req, res, next) => {
     try {
@@ -20,8 +20,8 @@ usersRouter.post('/', async (req, res, next) => {
         const { username, password } = req.body; 
         const saltRounds = 10;
 
-        if (password.length !== 6){
-           return next({name: "ValidationError", message: "No tiene 6 caracteres"});
+        if (password.length < 5){
+           return next({name: "ValidationError", message: "Contrasenia muy corta"});
         }
         const passwordHash = await bcrypt.hash(password, saltRounds); //esta el hash y el hashsync
 
@@ -37,5 +37,6 @@ usersRouter.post('/', async (req, res, next) => {
         next(error);
     }
 });
+
 
 module.exports = usersRouter;

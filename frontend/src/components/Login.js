@@ -55,7 +55,6 @@ const Login = () => {
     }
 
     const handleChange = ({target})=>{
-        
         setForm(() => {
             return {
                 ...form,
@@ -67,14 +66,14 @@ const Login = () => {
     return (
         <>
             {
-                token == null? (<div className="centrado" style={{width:"40%"}}>
+                token == null? (<div>
                 {
                         isLoading ? (<Loader />) :
                             (<div className="form" onSubmit={handleSubmit}>
                             <form>
                                 <input type="text" className="input" style={{"marginBottom":"1vh"}} onChange={handleChange} name="username" value={username} placeholder="Usuario" />
                                 <input type="password" className="input" style={{"marginBottom":"3vh"}} onChange={handleChange}  name="password" value={password} placeholder="Contrasenia" />
-                                <input className="button is-success" type="submit" type="submit" value="Iniciar sesión"/>
+                                <input className="button is-success" type="submit" value="Iniciar sesión"/>
                             </form>
                         </div>)
                     }

@@ -7,6 +7,7 @@ import { Route, Switch } from 'react-router';
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'bulma/css/bulma.css';
 import LoginPage from './pages/LoginPage';
+import RegistroPage from './pages/RegistroPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/" component={LoginPage}/>
         <Route exact path="/home" component={Home}/>
         <Route exact path="/mascota/:id" component={Detalle}/>
+        <Route exact path="/registro" component={RegistroPage}/>
         <Route exact path="*" component={Error404}/>
       </Switch>
     </Router>

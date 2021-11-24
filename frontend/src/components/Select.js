@@ -2,7 +2,7 @@ import React from 'react'
 
 const Select = ({ tiposMascota, handleChange }) => {
     return (
-        <div class="select">
+        <div className="select">
             <select
                 name="tipo"
                 onChange={handleChange}>
